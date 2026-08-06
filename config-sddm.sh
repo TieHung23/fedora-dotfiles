@@ -34,7 +34,9 @@ if [[ "$current_dm" == "sddm" ]]; then
   ok "SDDM is already the active display manager."
 else
   log "Current display manager: ${current_dm:-unknown}. Enabling sddm.service for next boot."
-  sudo systemctl enable sddm.service
+  # --force: display-manager.service is already a symlink to the old DM's
+  # unit (e.g. gdm.service); enable refuses to clobber it without this.
+  sudo systemctl enable --force sddm.service
   ok "sddm.service will take over on next reboot (your current session is untouched)."
 fi
 
