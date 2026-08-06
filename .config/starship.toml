@@ -1,0 +1,130 @@
+palette = "catppuccin_mocha"
+add_newline = true
+
+# Two-line framed prompt. Left of the fill: distro icon, path, git, docker.
+# Right of the fill: language versions, last command duration, clock.
+format = """
+[╭╴](subtext0)[ 󰣇 ](blue)\
+$directory\
+$git_branch\
+$git_status\
+$docker_context\
+$fill\
+$nodejs$rust$golang$python$dotnet\
+$cmd_duration\
+$time
+[╰╴](subtext0)$character"""
+
+[fill]
+symbol = " "
+
+[directory]
+style = "blue bold"
+format = "[$path]($style)[$read_only]($read_only_style) "
+truncation_length = 3
+truncation_symbol = "…/"
+read_only = "  "
+read_only_style = "red"
+
+[directory.substitutions]
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Music" = " "
+"Pictures" = " "
+"Developer" = "󰲋 "
+".config" = " "
+
+[git_branch]
+symbol = " "
+style = "mauve"
+format = "[on](subtext0) [$symbol$branch]($style) "
+
+[git_status]
+style = "yellow"
+format = "([$all_status$ahead_behind]($style) )"
+conflicted = "= "
+ahead = "⇡${count} "
+behind = "⇣${count} "
+diverged = "⇕⇡${ahead_count}⇣${behind_count} "
+untracked = "?${count} "
+stashed = " ${count} "
+modified = "!${count} "
+staged = "+${count} "
+renamed = "»${count} "
+deleted = "✘${count} "
+
+[docker_context]
+symbol = " "
+style = "sapphire"
+format = "[$symbol$context]($style) "
+only_with_files = true
+
+[nodejs]
+symbol = " "
+style = "green"
+format = "[$symbol($version )]($style)"
+
+[rust]
+symbol = " "
+style = "red"
+format = "[$symbol($version )]($style)"
+
+[golang]
+symbol = " "
+style = "cyan"
+format = "[$symbol($version )]($style)"
+
+[python]
+symbol = " "
+style = "yellow"
+format = "[$symbol($version )]($style)"
+
+[dotnet]
+symbol = "󰪮 "
+style = "mauve"
+format = "[$symbol($version )]($style)"
+
+[cmd_duration]
+min_time = 500
+style = "peach"
+format = "[ $duration]($style) "
+
+[time]
+disabled = false
+time_format = "%H:%M"
+style = "subtext0"
+format = "[ $time]($style)"
+
+[character]
+success_symbol = "[❯](green bold)"
+error_symbol = "[❯](red bold)"
+vimcmd_symbol = "[❮](mauve bold)"
+
+# Catppuccin Mocha — https://github.com/catppuccin/starship
+[palettes.catppuccin_mocha]
+rosewater = "#f5e0dc"
+flamingo  = "#f2cdcd"
+pink      = "#f5c2e7"
+mauve     = "#cba6f7"
+red       = "#f38ba8"
+maroon    = "#eba0ac"
+peach     = "#fab387"
+yellow    = "#f9e2af"
+green     = "#a6e3a1"
+teal      = "#94e2d5"
+sky       = "#89dceb"
+sapphire  = "#74c7ec"
+blue      = "#89b4fa"
+lavender  = "#b4befe"
+text      = "#cdd6f4"
+subtext1  = "#bac2de"
+subtext0  = "#a6adc8"
+overlay2  = "#9399b2"
+overlay1  = "#7f849c"
+overlay0  = "#6c7086"
+surface2  = "#585b70"
+surface1  = "#45475a"
+surface0  = "#313244"
+base      = "#1e1e2e"
+mantle    = "#181825"
+crust     = "#11111b"
