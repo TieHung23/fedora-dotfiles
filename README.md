@@ -30,6 +30,12 @@ Prefer to run a piece at a time? Every step is its own script:
 ./install.sh --help
 ```
 
+One heavyweight install is opt-in and deliberately left out of the full run:
+
+```bash
+./install.sh zed-csharp   # C# LSP + debugger for Zed (pulls in Rust)
+```
+
 ## How it's organised
 
 | Script | What it does |
@@ -39,7 +45,8 @@ Prefer to run a piece at a time? Every step is its own script:
 | `install-app.sh` | Dev CLI tools, Docker Engine + Desktop, .NET SDK 9.0/10.0, Zed, kitty, a Nerd Font. Offers a few more tools interactively at the end. |
 | `install-sddm.sh` | SDDM + its Qt6 deps + the SilentSDDM theme files. |
 | `install-zsh.sh` | zsh + zsh-autosuggestions + zsh-syntax-highlighting. |
-| `config-app.sh` | Deploys the kitty/btop/fastfetch/starship/lazygit configs, plus `xdg-terminals.list` and `environment.d/50-terminal.conf` (both set kitty as the default terminal), from `.config/`. |
+| `install-zed-csharp.sh` | C# in Zed: netcoredbg into `/usr/local/lib/netcoredbg`, a Rust toolchain, and the `zed-netcoredbg` dev extension that registers the debug adapter. Ends with one manual step in Zed's UI. Opt-in. |
+| `config-app.sh [group]` | Deploys configs from `.config/`. `terminal` = kitty/btop/fastfetch/starship/lazygit + `xdg-terminals.list` + `environment.d`; `zed` = Zed's `settings.json`/`debug.json`; no argument = both. Deploying **replaces** — edit configs in this repo, not in `~/.config`, or the next run overwrites them (undo lives in `~/.config-backup/<timestamp>/`). |
 | `config-sddm.sh` | Activates the SilentSDDM theme and switches the display manager from GDM to SDDM. |
 | `config-zsh.sh` | Deploys `.zshrc` and sets zsh as your login shell (`chsh`). |
 

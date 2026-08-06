@@ -14,6 +14,7 @@
 #   ./install.sh apps            # apps only         (install-app.sh)
 #   ./install.sh sddm            # install + activate SDDM/SilentSDDM
 #   ./install.sh zsh             # install zsh + deploy .zshrc + set login shell
+#   ./install.sh zed-csharp      # C# LSP + debugger for Zed (opt-in: pulls Rust)
 #   ./install.sh -h | --help
 #
 set -euo pipefail
@@ -22,7 +23,7 @@ source "$HERE/lib.sh"
 require_not_root
 
 run() { section "▶ $1"; "$HERE/$1"; }
-usage() { sed -n '2,18p' "$HERE/install.sh" | sed 's/^# \{0,1\}//'; exit 0; }
+usage() { sed -n '2,19p' "$HERE/install.sh" | sed 's/^# \{0,1\}//'; exit 0; }
 
 INSTALL_STEPS=(install-app.sh install-sddm.sh install-zsh.sh)
 CONFIG_STEPS=(config-app.sh config-sddm.sh config-zsh.sh)
@@ -39,6 +40,10 @@ case "${1:-all}" in
   apps)    run install-app.sh ;;
   sddm)    run install-sddm.sh; run config-sddm.sh ;;
   zsh)     run install-zsh.sh; run config-zsh.sh ;;
+  # Big, optional install — deliberately left out of `all`.
+  # Only the zed group — a full config-app.sh here would replace every other
+  # config too, wiping live edits that were never copied back into the repo.
+  zed-csharp) run install-zed-csharp.sh; section "▶ config-app.sh zed"; "$HERE/config-app.sh" zed ;;
   *) echo "Unknown target: $1" >&2; usage ;;
 esac
 

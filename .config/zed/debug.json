@@ -1,0 +1,62 @@
+// Global debug configurations (Ctrl-Shift-P -> "zed: open debug tasks").
+// These show up in every project.
+//
+// The "netcoredbg" adapter needs the dev extension installed:
+//   ~/Projects/fedora-dotfiles/install-zed-csharp.sh
+//
+// Only "attach" is global: a launch config has to name the built .dll by path,
+// and there is no Zed variable for the assembly name (the only worktree
+// variable is $ZED_WORKTREE_ROOT). So launch configs go per-project — copy the
+// template at the bottom of this file into <project>/.zed/debug.json.
+[
+  // Attach to a running .NET process. Zed prompts for the PID — pick your app.
+  {
+    "label": "C#: attach to process",
+    "adapter": "netcoredbg",
+    "request": "attach"
+  }
+]
+
+// ---------------------------------------------------------------------------
+// Per-project template — put this in <project>/.zed/debug.json
+// ---------------------------------------------------------------------------
+//
+// [
+//   {
+//     "label": "Debug Api",
+//     "adapter": "netcoredbg",
+//     "request": "launch",
+//     "program": "$ZED_WORKTREE_ROOT/src/Api/bin/Debug/net10.0/Api.dll",
+//     "cwd": "$ZED_WORKTREE_ROOT/src/Api",
+//     "args": [],
+//     "env": {
+//       "ASPNETCORE_ENVIRONMENT": "Development",
+//       "ASPNETCORE_URLS": "http://localhost:5000"
+//     },
+//     "stopAtEntry": false,
+//     "justMyCode": true,
+//     "enableStepFiltering": true,
+//     "build": {
+//       "command": "dotnet",
+//       "args": ["build", "$ZED_WORKTREE_ROOT/src/Api/Api.csproj", "-c", "Debug"]
+//     }
+//   }
+// ]
+//
+// For a single-project repo where the folder name is the assembly name, the
+// paths collapse to:
+//     "program": "$ZED_WORKTREE_ROOT/bin/Debug/net10.0/MyApp.dll",
+//     "cwd": "$ZED_WORKTREE_ROOT",
+//     "build": { "command": "dotnet", "args": ["build", "$ZED_WORKTREE_ROOT", "-c", "Debug"] }
+//
+// Fields the netcoredbg adapter accepts:
+//   launch: program (.dll/.exe, required), args, cwd, env, stopAtEntry,
+//           justMyCode, enableStepFiltering
+//   attach: processId (omit to get a picker)
+//
+// Notes:
+//   - "program" is the built .dll, never the .csproj.
+//   - Match the TFM in the path to the project's target (net9.0 / net10.0).
+//   - Without "build", the debugger runs whatever was compiled last.
+//   - Breakpoints can show "unverified" until the process loads the module;
+//     they still bind and hit.
