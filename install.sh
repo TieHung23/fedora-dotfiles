@@ -13,6 +13,7 @@
 #   ./install.sh config          # only the config-* steps (deploy dotfiles)
 #   ./install.sh apps            # apps only         (install-app.sh)
 #   ./install.sh sddm            # install + activate SDDM/SilentSDDM
+#   ./install.sh zsh             # install zsh + deploy .zshrc + set login shell
 #   ./install.sh -h | --help
 #
 set -euo pipefail
@@ -21,10 +22,10 @@ source "$HERE/lib.sh"
 require_not_root
 
 run() { section "▶ $1"; "$HERE/$1"; }
-usage() { sed -n '2,17p' "$HERE/install.sh" | sed 's/^# \{0,1\}//'; exit 0; }
+usage() { sed -n '2,18p' "$HERE/install.sh" | sed 's/^# \{0,1\}//'; exit 0; }
 
-INSTALL_STEPS=(install-app.sh install-sddm.sh)
-CONFIG_STEPS=(config-app.sh config-sddm.sh)
+INSTALL_STEPS=(install-app.sh install-sddm.sh install-zsh.sh)
+CONFIG_STEPS=(config-app.sh config-sddm.sh config-zsh.sh)
 
 case "${1:-all}" in
   -h|--help) usage ;;
@@ -37,6 +38,7 @@ case "${1:-all}" in
   config)  for s in "${CONFIG_STEPS[@]}"; do run "$s"; done ;;
   apps)    run install-app.sh ;;
   sddm)    run install-sddm.sh; run config-sddm.sh ;;
+  zsh)     run install-zsh.sh; run config-zsh.sh ;;
   *) echo "Unknown target: $1" >&2; usage ;;
 esac
 
@@ -44,3 +46,4 @@ section "All done."
 echo "- Log out/in for the 'docker' group to apply."
 echo "- Open a new shell (or kitty window) for starship/fastfetch/.NET PATH."
 echo "- TEST the SDDM theme (cd /usr/share/sddm/themes/silent && ./test.sh) before rebooting."
+echo "- Log out/in for the zsh login-shell change to apply."

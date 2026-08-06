@@ -12,7 +12,7 @@ require_not_root
 SRC="$HERE/.config"
 
 section "Deploying terminal + CLI configs"
-for item in kitty btop fastfetch starship.toml lazygit; do
+for item in kitty btop fastfetch starship.toml lazygit xdg-terminals.list environment.d; do
   deploy "$SRC/$item" "$HOME/.config/$item"
 done
 
