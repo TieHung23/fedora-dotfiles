@@ -42,7 +42,7 @@ One heavyweight install is opt-in and deliberately left out of the full run:
 |---|---|
 | `install.sh` | Entry point / orchestrator. Runs the steps below in order. |
 | `lib.sh` | Shared helpers — sourced by the others, not run directly. |
-| `install-app.sh` | Dev CLI tools, Docker Engine + Desktop, .NET SDK 9.0/10.0, Zed, kitty, a Nerd Font. Offers a few more tools interactively at the end. |
+| `install-app.sh` | Dev CLI tools, Docker Engine + Desktop, .NET SDK 9.0/10.0, Zed, kitty, a Nerd Font, and flatpak apps (Vesktop). Offers a few more tools interactively at the end. |
 | `install-sddm.sh` | SDDM + its Qt6 deps + the SilentSDDM theme files. |
 | `install-zsh.sh` | zsh + zsh-autosuggestions + zsh-syntax-highlighting. |
 | `install-zed-csharp.sh` | C# in Zed: netcoredbg into `/usr/local/lib/netcoredbg`, a Rust toolchain, and the `zed-netcoredbg` dev extension that registers the debug adapter. Ends with one manual step in Zed's UI. Opt-in. |

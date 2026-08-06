@@ -76,6 +76,35 @@ pkg_install() {
 }
 
 # ----------------------------------------------------------------------------
+# flatpak install — user scope
+# ----------------------------------------------------------------------------
+# Fedora's preinstalled flathub remote is *filtered* (it hides a chunk of the
+# catalogue) and system-scoped, so we add our own user remote and install
+# there. User scope also means no sudo, and no fighting the system remote.
+ensure_flathub() {
+  rpm -q flatpak >/dev/null 2>&1 || { log "Installing flatpak"; sudo dnf install -y flatpak; }
+  if flatpak remotes --user --columns=name 2>/dev/null | grep -qx flathub; then
+    return 0
+  fi
+  log "Adding the flathub remote (user)"
+  flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+}
+
+# flatpak_install APP_ID... — install from flathub into the user installation.
+flatpak_install() {
+  ensure_flathub
+  local app
+  for app in "$@"; do
+    if flatpak info --user "$app" >/dev/null 2>&1; then
+      ok "$app already installed"
+    else
+      log "Installing $app"
+      flatpak install --user --assumeyes flathub "$app"
+    fi
+  done
+}
+
+# ----------------------------------------------------------------------------
 # config deployment (copy with backup)
 # ----------------------------------------------------------------------------
 # One shared backup dir per run so you can undo a whole apply at once.

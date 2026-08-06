@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 #
 # Install dev CLI tools, Docker (Engine + Desktop), .NET SDK 9.0/10.0, Zed,
-# kitty and a Nerd Font. Everything here is idempotent — safe to re-run.
+# kitty, a Nerd Font, and the flatpak apps. Everything here is idempotent —
+# safe to re-run.
 #
 #   ./install-app.sh          # everything below
 #
@@ -30,6 +31,11 @@ LANGUAGES=(
   nodejs    # includes npm on Fedora
 )
 
+# Flatpak apps (user scope — see flatpak_install in lib.sh).
+FLATPAK_APPS=(
+  dev.vencord.Vesktop  # Vesktop — Discord client with Vencord baked in
+)
+
 # Not installed by default — offered interactively at the end.
 SUGGESTED=(
   neovim lazydocker yazi ncdu duf
@@ -40,6 +46,9 @@ pkg_install "${DEV_TOOLS[@]}"
 
 section "Installing language runtimes"
 pkg_install "${LANGUAGES[@]}"
+
+section "Flatpak apps"
+flatpak_install "${FLATPAK_APPS[@]}"
 
 section "Docker Engine"
 install_docker_engine() {
