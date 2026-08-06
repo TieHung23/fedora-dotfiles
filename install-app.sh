@@ -24,6 +24,12 @@ DEV_TOOLS=(
   starship        # riced cross-shell prompt (COPR; config in .config/starship.toml)
 )
 
+# Language runtimes. Comment out any you don't need.
+LANGUAGES=(
+  golang    # go toolchain
+  nodejs    # includes npm on Fedora
+)
+
 # Not installed by default — offered interactively at the end.
 SUGGESTED=(
   neovim lazydocker yazi ncdu duf
@@ -31,6 +37,9 @@ SUGGESTED=(
 
 section "Installing dev CLI tools"
 pkg_install "${DEV_TOOLS[@]}"
+
+section "Installing language runtimes"
+pkg_install "${LANGUAGES[@]}"
 
 section "Docker Engine"
 install_docker_engine() {

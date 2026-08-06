@@ -59,6 +59,7 @@ there to `~/.config-backup/<timestamp>/`).
   to `/usr/share/sddm/themes/silent`.
 - Dev CLI tools: `git`, `gh`, `lazygit`, `ripgrep`, `fd`, `fzf`, `bat`, `eza`,
   `zoxide`, `jq`, `btop`, `fastfetch`, `starship`.
+- Language runtimes: **Go** (`golang`), **Node.js** (`nodejs`, npm included).
 - Suggested (opt-in prompt at the end of `install-app.sh`): `neovim`,
   `lazydocker`, `yazi`, `ncdu`, `duf`.
 
