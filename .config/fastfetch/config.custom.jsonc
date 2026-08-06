@@ -1,0 +1,125 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+  // Colors are truecolor SGR fragments matching the Catppuccin Mocha palette:
+  //   mauve 203;166;247  pink 245;194;231  lavender 180;190;254
+  //   peach 250;179;135  teal 148;226;213  subtext0 166;173;200
+  "logo": {
+    "type": "builtin",
+    "padding": {
+      "top": 1,
+      "left": 2,
+      "right": 3
+    }
+  },
+  "display": {
+    "separator": "  ",
+    "key": {
+      "width": 13
+    },
+    "percent": {
+      "type": ["num"]
+    }
+  },
+  "modules": [
+    {
+      "type": "custom",
+      "format": "\u001b[38;2;203;166;247m╭────────────────────────────────────────────────────────────────────╮\u001b[0m"
+    },
+    {
+      "type": "title",
+      "key": " ",
+      "keyColor": "38;2;203;166;247",
+      "format": "  \u001b[1;38;2;245;194;231m  {user-name}\u001b[0m\u001b[38;2;166;173;200m@\u001b[1;38;2;203;166;247m{host-name}\u001b[0m"
+    },
+    {
+      "type": "custom",
+      "format": "\u001b[38;2;203;166;247m├────────────────────────────────────────────────────────────────────┤\u001b[0m"
+    },
+    {
+      "type": "os",
+      "key": "    os",
+      "keyColor": "38;2;245;194;231"
+    },
+    {
+      "type": "host",
+      "key": "    host",
+      "keyColor": "38;2;180;190;254"
+    },
+    {
+      "type": "kernel",
+      "key": "    kernel",
+      "keyColor": "38;2;203;166;247"
+    },
+    {
+      "type": "uptime",
+      "key": "    uptime",
+      "keyColor": "38;2;250;179;135"
+    },
+    {
+      "type": "packages",
+      "key": "    pkgs",
+      "keyColor": "38;2;148;226;213"
+    },
+    {
+      "type": "shell",
+      "key": "    shell",
+      "keyColor": "38;2;245;194;231"
+    },
+    {
+      "type": "de",
+      "key": "    de",
+      "keyColor": "38;2;203;166;247"
+    },
+    {
+      "type": "terminal",
+      "key": "    term",
+      "keyColor": "38;2;250;179;135"
+    },
+    {
+      "type": "custom",
+      "format": "\u001b[38;2;203;166;247m├────────────────────────────────────────────────────────────────────┤\u001b[0m"
+    },
+    {
+      "type": "cpu",
+      "key": "    cpu",
+      "keyColor": "38;2;245;194;231"
+    },
+    {
+      "type": "gpu",
+      "key": "    gpu",
+      "keyColor": "38;2;203;166;247"
+    },
+    {
+      "type": "memory",
+      "key": "    mem",
+      "keyColor": "38;2;180;190;254"
+    },
+    {
+      "type": "disk",
+      "key": "    disk",
+      "keyColor": "38;2;148;226;213"
+    },
+    {
+      "type": "display",
+      "key": "    disp",
+      "keyColor": "38;2;203;166;247"
+    },
+    {
+      "type": "battery",
+      "key": "    batt",
+      "keyColor": "38;2;245;194;231"
+    },
+    {
+      "type": "custom",
+      "format": "\u001b[38;2;203;166;247m╰────────────────────────────────────────────────────────────────────╯\u001b[0m"
+    },
+    {
+      "type": "break"
+    },
+    {
+      "type": "colors",
+      "paddingLeft": 2,
+      "symbol": "circle"
+    }
+  ]
+}
