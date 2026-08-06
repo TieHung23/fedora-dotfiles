@@ -3,8 +3,9 @@ add_newline = true
 
 # Two-line framed prompt. Left of the fill: distro icon, path, git, docker.
 # Right of the fill: language versions, last command duration, clock.
+# 󰣛 is nf-md-fedora (U+F08DB) — needs the Nerd Font installed by install-app.sh.
 format = """
-[╭╴](subtext0)[ 󰣇 ](blue)\
+[╭╴](subtext0)[ 󰣛 ](fedora)\
 $directory\
 $git_branch\
 $git_status\
@@ -101,7 +102,9 @@ error_symbol = "[❯](red bold)"
 vimcmd_symbol = "[❮](mauve bold)"
 
 # Catppuccin Mocha — https://github.com/catppuccin/starship
+# Plus `fedora`: the Fedora brand blue, for the distro icon.
 [palettes.catppuccin_mocha]
+fedora    = "#51a2da"
 rosewater = "#f5e0dc"
 flamingo  = "#f2cdcd"
 pink      = "#f5c2e7"
