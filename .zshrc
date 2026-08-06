@@ -49,6 +49,11 @@ ZSH_HIGHLIGHT_STYLES[comment]='fg=#6C7086,italic'
 # --- misc ---
 export EDITOR=vim
 export TERMINAL=kitty
+# Rust (rustup installs with --no-modify-path, so PATH is ours to set).
+# GUI apps get this from .config/environment.d/60-dev-path.conf instead.
+[[ -d "$HOME/.cargo/bin" ]] && export PATH="$HOME/.cargo/bin:$PATH"
+# User-local binaries — Zed's installer and the Claude Code CLI both land here.
+[[ -d "$HOME/.local/bin" ]] && export PATH="$HOME/.local/bin:$PATH"
 alias ls='ls --color=auto'
 alias ll='ls -alF'
 alias grep='grep --color=auto'
