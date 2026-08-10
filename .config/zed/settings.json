@@ -7,6 +7,8 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "buffer_font_family": "JetBrainsMono Nerd Font Mono",
+  "ui_font_family": "JetBrainsMono Nerd Font Mono",
   "base_keymap": "Zed",
   // C#: OmniSharp language server, pulled from the extension registry.
   "auto_install_extensions": {
@@ -25,10 +27,13 @@
   "icon_theme": {
     "mode": "dark",
     "light": "Zed (Default)",
-    "dark": "Zed (Default)"
+    "dark": "Symbols Icon Theme"
   },
   "agent_servers": {
     "claude-acp": {
+      "default_config_options": {
+        "mode": "acceptEdits"
+      },
       "type": "registry"
     }
   },
@@ -36,7 +41,7 @@
   "buffer_font_size": 15,
   "theme": {
     "mode": "dark",
-    "light": "Gruvbox Light",
-    "dark": "Ayu Dark",
+    "light": "Solarized Light",
+    "dark": "Catppuccin Mocha - No Italics",
   },
 }
