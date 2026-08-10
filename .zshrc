@@ -54,8 +54,19 @@ export TERMINAL=kitty
 [[ -d "$HOME/.cargo/bin" ]] && export PATH="$HOME/.cargo/bin:$PATH"
 # User-local binaries — Zed's installer and the Claude Code CLI both land here.
 [[ -d "$HOME/.local/bin" ]] && export PATH="$HOME/.local/bin:$PATH"
-alias ls='ls --color=auto'
-alias ll='ls -alF'
+# ls -> eza, same set CachyOS ships in its shell config. --icons needs the Nerd
+# Font from install-app.sh; it degrades to no icons rather than breaking without.
+# Guarded so a box without eza still gets a working ls.
+if command -v eza >/dev/null 2>&1; then
+  alias ls='eza -al --color=always --group-directories-first --icons'  # preferred listing
+  alias la='eza -a --color=always --group-directories-first --icons'   # all files and dirs
+  alias ll='eza -l --color=always --group-directories-first --icons'   # long format
+  alias lt='eza -aT --color=always --group-directories-first --icons'  # tree listing
+  alias l.="eza -a | grep -E '^\.'"                                    # dotfiles only
+else
+  alias ls='ls --color=auto'
+  alias ll='ls -alF'
+fi
 alias grep='grep --color=auto'
 
 eval "$(starship init zsh)"
