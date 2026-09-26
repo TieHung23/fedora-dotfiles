@@ -10,7 +10,7 @@
 # everything else.
 #
 #   ./config-app.sh          # all groups
-#   ./config-app.sh terminal # kitty, btop, fastfetch, starship, lazygit, default-terminal bits
+#   ./config-app.sh terminal # ghostty, btop, fastfetch, starship, lazygit, default-terminal bits
 #   ./config-app.sh zed      # Zed settings.json + debug.json only
 #
 set -euo pipefail
@@ -21,7 +21,7 @@ require_not_root
 SRC="$HERE/.config"
 GROUP="${1:-all}"
 
-TERMINAL_ITEMS=(kitty btop fastfetch starship.toml lazygit xdg-terminals.list environment.d)
+TERMINAL_ITEMS=(ghostty btop fastfetch starship.toml lazygit xdg-terminals.list environment.d)
 # Zed goes file by file, not as a directory: ~/.config/zed also holds themes/
 # and extension state that deploy() would wipe.
 ZED_ITEMS=(zed/settings.json zed/debug.json)
@@ -55,4 +55,4 @@ case "$GROUP" in
 esac
 
 ok "Configs deployed. Backups (if any) in ${DOTFILES_BACKUP/#$HOME/~}."
-echo "Open a new shell (or new kitty window) to see the prompt + banner."
+echo "Open a new shell (or new Ghostty window) to see the prompt + banner."

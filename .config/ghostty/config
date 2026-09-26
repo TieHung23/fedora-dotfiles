@@ -1,0 +1,35 @@
+# Fedora rice — Ghostty + Catppuccin Mocha + JetBrainsMono Nerd Font
+# Theme lives next to this file in themes/ so it doesn't depend on the name of
+# whichever built-in theme the installed Ghostty version ships.
+theme = catppuccin-mocha
+# Tint the GTK tab bar / window chrome with the theme's colors too.
+window-theme = ghostty
+
+font-family = JetBrainsMono Nerd Font
+font-size = 12
+
+window-padding-x = 10
+window-padding-y = 10
+window-padding-balance = true
+confirm-close-surface = false
+
+# No title bar (GTK header bar); tabs still show when there's more than one.
+gtk-titlebar = false
+
+cursor-style = bar
+cursor-style-blink = false
+
+mouse-hide-while-typing = true
+shell-integration = detect
+# Copy Ghostty's terminfo to SSH hosts (and fall back to xterm-256color when
+# it can't) so remote shells don't choke on TERM=xterm-ghostty.
+shell-integration-features = ssh-terminfo,ssh-env
+
+# Same shortcuts the old kitty config had. Copy/paste (ctrl+shift+c/v),
+# new tab (ctrl+shift+t) and close (ctrl+shift+w) are already Ghostty defaults.
+keybind = ctrl+shift+enter=new_split:auto
+keybind = ctrl+shift+q=close_window
+keybind = ctrl+shift+equal=increase_font_size:1
+keybind = ctrl+shift+minus=decrease_font_size:1
+keybind = ctrl+shift+backspace=reset_font_size
+keybind = ctrl+shift+f=toggle_fullscreen

@@ -12,7 +12,7 @@
 #   ./install.sh install         # only the install-* steps (packages)
 #   ./install.sh config          # only the config-* steps (deploy dotfiles)
 #   ./install.sh apps            # apps only         (install-app.sh)
-#   ./install.sh sddm            # install + activate SDDM/SilentSDDM
+#   ./install.sh greetd          # install + activate greetd/tuigreet (TUI login)
 #   ./install.sh zsh             # install zsh + deploy .zshrc + set login shell
 #   ./install.sh zed-csharp      # C# LSP + debugger for Zed (opt-in: pulls Rust)
 #   ./install.sh -h | --help
@@ -25,8 +25,8 @@ require_not_root
 run() { section "▶ $1"; "$HERE/$1"; }
 usage() { sed -n '2,19p' "$HERE/install.sh" | sed 's/^# \{0,1\}//'; exit 0; }
 
-INSTALL_STEPS=(install-app.sh install-sddm.sh install-zsh.sh)
-CONFIG_STEPS=(config-app.sh config-sddm.sh config-zsh.sh)
+INSTALL_STEPS=(install-app.sh install-greetd.sh install-zsh.sh)
+CONFIG_STEPS=(config-app.sh config-greetd.sh config-zsh.sh)
 
 case "${1:-all}" in
   -h|--help) usage ;;
@@ -38,7 +38,7 @@ case "${1:-all}" in
   install) ensure_dnf; for s in "${INSTALL_STEPS[@]}"; do run "$s"; done ;;
   config)  for s in "${CONFIG_STEPS[@]}"; do run "$s"; done ;;
   apps)    run install-app.sh ;;
-  sddm)    run install-sddm.sh; run config-sddm.sh ;;
+  greetd)  run install-greetd.sh; run config-greetd.sh ;;
   zsh)     run install-zsh.sh; run config-zsh.sh ;;
   # Big, optional install — deliberately left out of `all`.
   # Only the zed group — a full config-app.sh here would replace every other
@@ -49,6 +49,6 @@ esac
 
 section "All done."
 echo "- Log out/in for the 'docker' group to apply."
-echo "- Open a new shell (or kitty window) for starship/fastfetch/.NET PATH."
-echo "- TEST the SDDM theme (cd /usr/share/sddm/themes/silent && ./test.sh) before rebooting."
+echo "- Open a new shell (or Ghostty window) for starship/fastfetch/.NET PATH."
+echo "- greetd takes over the login screen on next reboot (Ctrl+Alt+F3 if it doesn't come up)."
 echo "- Log out/in for the zsh login-shell change to apply."

@@ -31,7 +31,13 @@ require_fedora() {
 
 ensure_dnf() {
   require_fedora
-  rpm -q dnf-plugins-core >/dev/null 2>&1 || { log "Installing dnf-plugins-core (COPR support)"; sudo dnf install -y dnf-plugins-core; }
+  dnf copr --help >/dev/null 2>&1 && return 0
+  # `dnf copr` lives in dnf5-plugins on dnf5 (Fedora 41+) and in
+  # dnf-plugins-core on classic dnf — installing the wrong one is a silent no-op.
+  local pkg=dnf-plugins-core
+  command -v dnf5 >/dev/null 2>&1 && pkg=dnf5-plugins
+  log "Installing $pkg (COPR support)"
+  sudo dnf install -y "$pkg"
 }
 
 # ----------------------------------------------------------------------------
@@ -43,6 +49,8 @@ declare -A PKG_MAP=(
   [lazygit]="copr:atim/lazygit|lazygit"
   [lazydocker]="copr:atim/lazydocker|lazydocker"
   [starship]="copr:atim/starship|starship"
+  [ghostty]="copr:scottames/ghostty|ghostty"
+  [yazi]="copr:lihaohong/yazi|yazi"
   [fd]="fd-find"
 )
 
