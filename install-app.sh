@@ -15,14 +15,17 @@ ensure_dnf
 DEV_TOOLS=(
   git gh          # version control + GitHub from the terminal
   lazygit         # TUI for git (COPR)
-  ripgrep fd fzf  # fast search / find / fuzzy-finder
-  bat eza zoxide  # better cat / ls / cd
+  ripgrep fd      # fast search / find
+  eza             # better ls
   jq
   btop            # system monitor
   fastfetch       # system info banner
   tree unzip wget curl
   ghostty         # GPU terminal emulator (COPR)
   starship        # riced cross-shell prompt (COPR; config in .config/starship.toml)
+  neovim          # editor
+  yazi            # terminal file manager (COPR)
+  ncdu duf        # interactive disk usage / friendlier 'df'
 )
 
 # Language runtimes. Comment out any you don't need.
@@ -38,7 +41,7 @@ FLATPAK_APPS=(
 
 # Not installed by default — offered interactively at the end.
 SUGGESTED=(
-  neovim lazydocker yazi ncdu duf
+  lazydocker
 )
 
 section "Installing dev CLI tools"
@@ -138,11 +141,7 @@ fi
 
 section "Suggested extras"
 echo "Not installed by default — worth a look: ${SUGGESTED[*]}"
-echo "  neovim     — editor (pairs with LazyVim-style configs)"
 echo "  lazydocker — TUI for Docker (COPR)"
-echo "  yazi       — terminal file manager"
-echo "  ncdu       — interactive disk usage"
-echo "  duf        — friendlier 'df'"
 if [[ -t 0 ]]; then
   read -r -p "Install these now? [y/N] " reply
   [[ "$reply" =~ ^[Yy]$ ]] && pkg_install "${SUGGESTED[@]}"

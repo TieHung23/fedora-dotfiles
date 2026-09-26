@@ -44,6 +44,7 @@ declare -A PKG_MAP=(
   [lazydocker]="copr:atim/lazydocker|lazydocker"
   [starship]="copr:atim/starship|starship"
   [ghostty]="copr:scottames/ghostty|ghostty"
+  [yazi]="copr:lihaohong/yazi|yazi"
   [fd]="fd-find"
 )
 
