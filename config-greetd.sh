@@ -30,13 +30,19 @@ sudo install -d -o "$greeter_user" -g "$greeter_user" -m 0755 /var/cache/tuigree
 if [[ -f /etc/greetd/config.toml ]] && ! sudo grep -q tuigreet /etc/greetd/config.toml; then
   sudo cp -a /etc/greetd/config.toml /etc/greetd/config.toml.orig
 fi
+# GNOME 50 (Fedora 44+) ships no X11 session, so there may be no xsessions
+# dir at all — only hand tuigreet the session dirs that exist.
+sessions=""
+for d in /usr/share/wayland-sessions /usr/share/xsessions; do
+  [[ -d "$d" ]] && sessions="${sessions:+$sessions:}$d"
+done
 sudo install -d /etc/greetd
 sudo tee /etc/greetd/config.toml >/dev/null <<TOML
 [terminal]
 vt = 1
 
 [default_session]
-command = "tuigreet --time --asterisks --remember --remember-user-session --sessions /usr/share/wayland-sessions:/usr/share/xsessions"
+command = "tuigreet --time --asterisks --remember --remember-user-session --sessions $sessions"
 user = "$greeter_user"
 TOML
 ok "greetd configured (/etc/greetd/config.toml, greeter user: $greeter_user)."
@@ -58,9 +64,8 @@ if [[ -n "$current_dm" && "$current_dm" != "greetd" ]]; then
   warn "If the greeter doesn't come up after rebooting, press Ctrl+Alt+F3, log in, and run:"
   echo "  sudo systemctl enable --force $current_dm.service && sudo reboot"
   echo
-  warn "Once you've confirmed greetd works, you can remove the old DM yourself"
-  echo "(read what dnf lists before confirming):"
-  echo "  sudo dnf remove $current_dm"
+  warn "Keep $current_dm installed — disabled it costs nothing and it's your way back."
+  echo "  (On Fedora Workstation, 'dnf remove gdm' can take GNOME packages with it.)"
 fi
 if [[ -d /usr/share/sddm/themes/silent ]]; then
   warn "Leftovers from the old SilentSDDM setup, safe to delete once greetd works:"

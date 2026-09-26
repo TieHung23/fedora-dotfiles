@@ -89,8 +89,9 @@ there to `~/.config-backup/<timestamp>/`).
   boot. It never kills your current GDM session. If the greeter doesn't come
   up, press Ctrl+Alt+F3, log in on the text console and run
   `sudo systemctl enable --force gdm.service && sudo reboot` (the script
-  prints the exact command). Once you've confirmed it works, you can remove
-  the old display manager yourself, e.g. `sudo dnf remove gdm`. Coming from
+  prints the exact command). Leave GDM installed, only disabled. It's your
+  way back, and on Workstation `dnf remove gdm` can take GNOME packages
+  with it. Coming from
   the old SilentSDDM setup? The script lists the leftover files to delete.
 - To update the repo after tweaking a config live, copy it back into
   `.config/` and commit.
