@@ -43,6 +43,7 @@ declare -A PKG_MAP=(
   [lazygit]="copr:atim/lazygit|lazygit"
   [lazydocker]="copr:atim/lazydocker|lazydocker"
   [starship]="copr:atim/starship|starship"
+  [ghostty]="copr:scottames/ghostty|ghostty"
   [fd]="fd-find"
 )
 

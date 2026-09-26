@@ -48,7 +48,7 @@ ZSH_HIGHLIGHT_STYLES[comment]='fg=#6C7086,italic'
 
 # --- misc ---
 export EDITOR=vim
-export TERMINAL=kitty
+export TERMINAL=ghostty
 # Rust (rustup installs with --no-modify-path, so PATH is ours to set).
 # GUI apps get this from .config/environment.d/60-dev-path.conf instead.
 [[ -d "$HOME/.cargo/bin" ]] && export PATH="$HOME/.cargo/bin:$PATH"

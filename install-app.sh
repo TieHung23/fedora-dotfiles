@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 # Install dev CLI tools, Docker (Engine + Desktop), .NET SDK 9.0/10.0, Zed,
-# kitty, a Nerd Font, and the flatpak apps. Everything here is idempotent —
+# Ghostty, a Nerd Font, and the flatpak apps. Everything here is idempotent —
 # safe to re-run.
 #
 #   ./install-app.sh          # everything below
@@ -21,7 +21,7 @@ DEV_TOOLS=(
   btop            # system monitor
   fastfetch       # system info banner
   tree unzip wget curl
-  kitty           # GPU terminal emulator
+  ghostty         # GPU terminal emulator (COPR)
   starship        # riced cross-shell prompt (COPR; config in .config/starship.toml)
 )
 

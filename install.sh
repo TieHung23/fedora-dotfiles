@@ -49,6 +49,6 @@ esac
 
 section "All done."
 echo "- Log out/in for the 'docker' group to apply."
-echo "- Open a new shell (or kitty window) for starship/fastfetch/.NET PATH."
+echo "- Open a new shell (or Ghostty window) for starship/fastfetch/.NET PATH."
 echo "- TEST the SDDM theme (cd /usr/share/sddm/themes/silent && ./test.sh) before rebooting."
 echo "- Log out/in for the zsh login-shell change to apply."

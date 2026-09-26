@@ -2,15 +2,15 @@
 
 Bash setup scripts + tracked dotfiles for provisioning a **Fedora** developer
 machine: Docker (Engine + Desktop), .NET SDK 9.0/10.0, Zed, dev CLI tooling,
-a **kitty** terminal rice (Catppuccin Mocha + JetBrainsMono Nerd Font +
-starship + fastfetch, no title bar, kitty set as the default terminal), a
+a **Ghostty** terminal rice (Catppuccin Mocha + JetBrainsMono Nerd Font +
+starship + fastfetch, no title bar, Ghostty set as the default terminal), a
 **zsh** shell (autosuggestions + syntax highlighting, same Catppuccin/starship
 look as bash), and a **SilentSDDM** login screen in place of GDM.
 
 No build system, test suite, or CI — scripts run directly and are written to
 be idempotent (safe to re-run). Packages come from **`dnf`**, enabling
 **COPR** for the handful of tools not in the main Fedora repos
-(`lazygit`, `lazydocker`, `starship`).
+(`lazygit`, `lazydocker`, `starship`, `ghostty`).
 
 ## Quick start
 
@@ -42,11 +42,11 @@ One heavyweight install is opt-in and deliberately left out of the full run:
 |---|---|
 | `install.sh` | Entry point / orchestrator. Runs the steps below in order. |
 | `lib.sh` | Shared helpers — sourced by the others, not run directly. |
-| `install-app.sh` | Dev CLI tools, Docker Engine + Desktop, .NET SDK 9.0/10.0, Zed, kitty, a Nerd Font, and flatpak apps (Vesktop). Offers a few more tools interactively at the end. |
+| `install-app.sh` | Dev CLI tools, Docker Engine + Desktop, .NET SDK 9.0/10.0, Zed, Ghostty, a Nerd Font, and flatpak apps (Vesktop). Offers a few more tools interactively at the end. |
 | `install-sddm.sh` | SDDM + its Qt6 deps + the SilentSDDM theme files. |
 | `install-zsh.sh` | zsh + zsh-autosuggestions + zsh-syntax-highlighting. |
 | `install-zed-csharp.sh` | C# in Zed: netcoredbg into `/usr/local/lib/netcoredbg`, a Rust toolchain, and the `zed-netcoredbg` dev extension that registers the debug adapter. Ends with one manual step in Zed's UI. Opt-in. |
-| `config-app.sh [group]` | Deploys configs from `.config/`. `terminal` = kitty/btop/fastfetch/starship/lazygit + `xdg-terminals.list` + `environment.d`; `zed` = Zed's `settings.json`/`debug.json`; no argument = both. Deploying **replaces** — edit configs in this repo, not in `~/.config`, or the next run overwrites them (undo lives in `~/.config-backup/<timestamp>/`). |
+| `config-app.sh [group]` | Deploys configs from `.config/`. `terminal` = ghostty/btop/fastfetch/starship/lazygit + `xdg-terminals.list` + `environment.d`; `zed` = Zed's `settings.json`/`debug.json`; no argument = both. Deploying **replaces** — edit configs in this repo, not in `~/.config`, or the next run overwrites them (undo lives in `~/.config-backup/<timestamp>/`). |
 | `config-sddm.sh` | Activates the SilentSDDM theme and switches the display manager from GDM to SDDM. |
 | `config-zsh.sh` | Deploys `.zshrc` and sets zsh as your login shell (`chsh`). |
 
@@ -64,9 +64,10 @@ there to `~/.config-backup/<timestamp>/`).
   `/usr/share/dotnet` (Microsoft's supported way to keep multiple SDKs
   installed together).
 - **Zed** — official non-Flatpak installer, user-local (`~/.local/bin/zed`).
-- **kitty** — terminal, themed Catppuccin Mocha, JetBrainsMono Nerd Font,
+- **Ghostty** — terminal (COPR `scottames/ghostty`), themed Catppuccin Mocha
+  (theme file shipped in `.config/ghostty/themes/`), JetBrainsMono Nerd Font,
   starship prompt, fastfetch banner on shell start, no window title bar
-  (`hide_window_decorations`), set as the system default terminal. Default
+  (`gtk-titlebar = false`), set as the system default terminal. Default
   fastfetch banner is the stock `examples/16.jsonc` preset; the previous
   custom Catppuccin box banner is kept at
   `.config/fastfetch/config-catppuccin.jsonc` (`fastfetch -c ~/.config/fastfetch/config-catppuccin.jsonc`
